@@ -16,7 +16,7 @@ Run `conda env create --name <env name> -f environment.yml` to install all neces
 1. [Optional] Preprocess data using `python preprocess_data.py --source <Path to unprocessed dataset>`
 2. Train the language model using `python model_script.py --mode lm [ --epochs <number of epochs> --model-name <name of the model> ]`
 3. Use the trained language model (or pretrained model) to finetune the summarizer. Run `python model_script.py --mode summ --lm-path <path to the language model> [ --epochs <number of epcochs> --model-name <name of the model> ]`
-4. Generate summaries with the command `python model_script.py --mode eval --lm-path <path to the language model> --model-name <name of the summarizer model> [ --output-dir <directory where to save generated summaries> ]`
+4. Generate summaries with the command `python model_script.py --mode eval --model-name <name of the summarizer model> [ --output-dir <directory where to save generated summaries> ]`
 
 #### Metrics
 Refer to the notebooks in `./eval/` to compute the different evaluation metrics.

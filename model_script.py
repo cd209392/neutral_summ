@@ -122,7 +122,7 @@ def load_parameters(agrs):
     return ds_config, hp
     
 
-def save_summaries(summaries, output_path, model_path):
+def save_summaries(summaries, output_path, model_name):
     """
     Save generated summaries to file
     """
@@ -131,7 +131,8 @@ def save_summaries(summaries, output_path, model_path):
         prod_id = e[0]
         summary = e[1][0]
         df.append({
-            "model_path": model_path,
+            "model_path": f"outputs/models/summ/{model_name}",
+            "model_name": model_name,
             "prod_id": prod_id, 
             "summary": summary
         })
@@ -165,13 +166,16 @@ def run(args):
     
     elif args.mode == "eval":
         # Load datasets
+        if args.test_path is not None:
+            ds_config.test_data = args.test_path
+        
         _, vocab = build_dataloaders(ds_config, dataset="train")
         test_iter, _ = build_dataloaders(ds_config, dataset="test", vocab=vocab)
         procedure = Procedure(hp, ds_config, vocab)
         
         # Generate and save summaries
         summaries = procedure.generate_summaries(itr=test_iter, model_name=args.model_name)
-        save_summaries(summaries, out_dir=args.output_dir, model_name=args.model_name)
+        save_summaries(summaries, output_path=args.output_path, model_name=args.model_name)
     else:
         raise Exception(f"mode '{args.mode}' is not supported. Try 'train', 'finetune', or 'eval'.")
 
@@ -198,6 +202,7 @@ if __name__ == "__main__":
     
     parser.add_argument("--lm-path", type=str, dest="lm_path", default=None, help="Path where to save the trained language model or path to a pretrained language model to load.")
     parser.add_argument("--model-name", type=str, dest="model_name", default=None, help="Name of the model. If None, a name will be automatically generated.")
+    parser.add_argument("--test-path", type=str, dest="test_path", default=None, help="Path to the test file.")
     parser.add_argument("--output-path", type=str, dest="output_path", default="./outputs/summaries/generated_summaries.csv", help="Path where to save generated summaries as CSV files.")
     
     # Parse arguments
