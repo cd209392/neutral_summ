@@ -225,10 +225,11 @@ class Summarizer(nn.Module):
             
             def select_hidden(hidden_type):
                 mapping = {0: revs_hidden, 1: h_hat, 2: h_tilt}
+                return mapping[hidden_type]
             
             sum_hidden = select_hidden(self.hp.mean_hidden_type)
             ref_hidden = select_hidden(self.hp.ref_hidden_type)
-            context = select_hidden(self.hp.context_hidden_type)
+            context = select_hidden(self.hp.mean_context_type)
         
         else:
             sum_hidden = revs_hidden
@@ -261,9 +262,10 @@ class Summarizer(nn.Module):
             
             def select_hidden(hidden_type):
                 mapping = {0: rec_hidden, 1: h_hat, 2: h_tilt}
+                return mapping[hidden_type]
                 
             hiddens = select_hidden(self.hp.gen_hidden_type)
-            context = select_hidden(self.hp.context_hidden_type)
+            context = select_hidden(self.hp.mean_context_type)
         else:
             hiddens = rec_hidden
             context = rec_hidden

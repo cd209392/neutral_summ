@@ -129,9 +129,9 @@ class HP():
         
         ######## TRAINING PARAMETTERS ########
         self.cls_num_epochs = 1 # Number of epochs for which train the classifier alone
+        
         self.cls_weight = 1.0 # Classifier loss weight
         self.rec_weight = 1.0 # reconstruction loss weight
-        self.acc_size = 64    # gradient accumulation steps
         self.optimizer = torch.optim.Adam
         self.default_coverage = False
         self.clip = 10.0
@@ -140,8 +140,10 @@ class HP():
         self.weight_decay = 1e-5
         self.tf_ratio = 0.85
         self.lm_epochs = 300
-        self.summarizer_epochs = 0
+        self.summarizer_epochs = 20
         self.save_epoch = 1  # Number of epochs after which start saving versions of the model
+        
+        self.acc_size = 64    # gradient accumulation steps
         
         if self.acc_size is None:
             self.acc_size = 0

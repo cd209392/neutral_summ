@@ -2,11 +2,10 @@ from data.preprocess import TextProcessing
 
 import pandas as pd
 import time
+import argparse
 import re
 
-
 DATA_DIR = "./data/"
-#FILE_PATH = f"{DATA_DIR}amazon_reviews_2018__uniform_ratings.csv"
 
 
 def preprocess(file_path):
@@ -26,4 +25,8 @@ def preprocess(file_path):
 
 
 if __name__ == "__main__":
-    preprocess()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--source", type=str, required=True, help="Path to raw data")
+    # Parse arguments
+    args = parser.parse_args()
+    preprocess(file_path=args.source)

@@ -105,7 +105,8 @@ class Procedure():
                         counter = tolerance
                         
                         # Save best model
-                        save_path = re.sub("\.pt$", f".{epoch}_epochs.pt", path)
+                        #save_path = re.sub("\.pt$", f".{epoch}_epochs.pt", path)
+                        save_path = path
                         torch.save(self.lm.state_dict(), save_path)
                     
                     elif epoch%check_every == 0:
@@ -188,7 +189,8 @@ class Procedure():
                     counter = tolerance
                     
                     # Save best model
-                    save_path = re.sub("\.pt$", f".{epoch}_epochs.pt", path)
+                    #save_path = re.sub("\.pt$", f".{epoch}_epochs.pt", path)
+                    save_path = path
                     torch.save(self.summarizer, save_path)
                     
                 elif epoch%check_every == 0:
@@ -401,10 +403,10 @@ class Procedure():
             
         if model == "lm":
             n_epochs = self.hp.lm_epochs
-            name = f"{lm_name}.batch_{batch_size}_docs.{dec_hid}.lr{self.hp.lm_lr}.pt"
+            name = f"{lm_name}.batch_{batch_size}_docs.{dec_hid}.lr{self.hp.lm_lr}.{self.hp.lm_epochs}_epochs.pt"
         elif model == "summarizer":
             n_epochs = self.hp.summarizer_epochs
-            name = f"summ.{lm_name}.batch_{batch_size}_docs.lm_lr{self.hp.lm_lr}.dec_{dec_hid}.sum_{sum_hid}.lr{self.hp.summ_lr}.pt"
+            name = f"summ.{lm_name}.batch_{batch_size}_docs.lm_lr{self.hp.lm_lr}.dec_{dec_hid}.sum_{sum_hid}.lr{self.hp.summ_lr}.{self.hp.summarizer_epochs}_epochs.pt"
         else:
             raise Error(f"model {model} is not recognized")
             
