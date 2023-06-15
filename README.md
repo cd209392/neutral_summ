@@ -5,7 +5,7 @@ To complete
 ## Installation
 Python version: ^3.6
 
-Run the requirements.txt to install all necessary libraries
+Run `conda env create --name <env name> -f environment.yml` to install all necessary libraries using [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html).
 
 ## Usage
 #### Define parameters:
