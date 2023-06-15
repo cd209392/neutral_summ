@@ -3,9 +3,9 @@
 To complete
 
 ## Installation
-Python version: ^3.6
-
-Run `conda env create --name <env name> -f environment.yml` to install all necessary libraries using [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html).
+* Python version: ^3.6
+* Run `conda env create --name <env name> -f environment.yml` to install all necessary libraries using [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html).
+* Create the following directories: `./outputs/models/lm/`, `./outputs/models/summ/`, `./outputs/summaries/`, and `./data/processed/`
 
 ## Usage
 #### Define parameters:
